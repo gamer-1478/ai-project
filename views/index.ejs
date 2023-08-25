@@ -1,0 +1,140 @@
+<div class="landing">
+    <div class="left-right">
+        <div class="landing-brand">
+            <h1 class="landing-title">Less Reading <br>More Knowing!</h1>
+            <button class="buy-now" onclick="new function(){window.location.href = '/store'}">Start Now</button>
+            <div class="branding-custom-container">
+                <div class="branding-custom">
+                    <h1>18000+</h1>
+                    <p>Regular Readers</p>
+                </div>
+                <div class="branding-custom">
+                    <h1>300+</h1>
+                    <p>News Partners</p>
+                </div>
+            </div>
+        </div>
+        <div class="landing-brand-end">
+            <img class="right-side-image"
+                src="https://clipart-library.com/data_images/69327.jpg">
+        </div>
+    </div>
+
+    <br><br><br>
+
+</div>
+
+<Style>
+    .branding-custom-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 60%;
+        align-self: flex-start;
+        align-items: center;
+        margin-top: 70px;
+    }
+
+    .right-side-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .landing-brand {
+        width: 50%;
+        border-radius: 20px;
+        background-color: transparent;
+        margin-top: 40px;
+        padding: 40px;
+        align-self: flex-start;
+    }
+
+    .landing-brand-end {
+        width: 50%;
+        border-radius: 20px;
+        background-color: transparent;
+        margin-top: 40px;
+        padding: 40px;
+        align-self: flex-end;
+    }
+
+    .landing {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .landing-title {
+        font-size: 5em;
+        font-weight: 600;
+        color: #000;
+        margin-top: 20px;
+    }
+
+    .buy-now {
+        background-color: #020202;
+        color: #fff;
+        border: 1px solid #020202;
+        border-radius: 5px;
+        padding: 24px;
+        font-size: 1.3em;
+        font-weight: 600;
+        margin-top: 20px;
+    }
+
+    .left-right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media screen and (max-width: 760px) {
+        .branding-custom-container {
+            width: 100%;
+        }
+
+        .left-right {
+            flex-direction: column;
+        }
+
+        .landing-brand,
+        .landing-brand-end {
+            width: 80%;
+        }
+
+        .landing-title {
+            font-size: 3em;
+            font-weight: 600;
+        }
+
+        .battle-field {
+            flex-direction: column;
+            height: auto;
+        }
+
+        .battle-field-image {
+            width: 80%;
+            height: auto;
+            margin-top: 40px;
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        .battle-field-video {
+            width: 80%;
+            height: auto;
+            margin: 0;
+        }
+
+        .battle-title {
+            font-size: 2em;
+            font-weight: 600;
+            color: #000;
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    }
+</Style>
