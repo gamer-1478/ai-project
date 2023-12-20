@@ -7,41 +7,30 @@
                 <a href="/" class="nav-link">Home</a>
             </li>
             <li class="nav-item">
-                <a href="/store" class="nav-link">Topics</a>
+                <a href="/topics" class="nav-link">Topics</a>
             </li>
             <li class="nav-item">
-                <a href="/store?type=indian" class="nav-link">Podcasts</a>
+                <a href="/podcasts" class="nav-link">Podcasts</a>
             </li>
             <li class="nav-item">
-                <a href="/store?type=western" class="nav-link">Events</a>
+                <a href="/events" class="nav-link">Events</a>
             </li>
             <% if (typeof user !="undefined" ){ %>
                 <% } else { %>
 
                     <li class="nav-item sign-button-mobile">
-                        <a href="/auth/register" class="nav-link">Sign Up</a>
-                    </li>
-                    <li class="nav-item sign-button-mobile">
-                        <a href="/auth/login" class="nav-link">LogIn</a>
+                        <a href="/signup" class="nav-link">Sign Up</a>
                     </li>
                 <% } %>
 
         </ul>
         <div class="right-side-nav">
-            <div class="search-input-div">
-                <input type="text" class="search-input" id="searchInput" placeholder="Search" name="search" id="search"
-                    onsubmit="sendData()" />
-                <img class="search-icon" alt="search"
-                    src="https://cdn.discordapp.com/attachments/1005877818586038424/1006499467207381062/search.png"
-                    width="20px" onclick="sendData()" />
-
-            </div>
             <% if (typeof user !="undefined" ){ %>
                 <a href="/dashboard"><img width="28px" style="filter:invert(100%)"
                         src="https://cdn.discordapp.com/attachments/1005877818586038424/1006499498874380359/profile.png"
                         alt="profile"></a>
                 <% } else { %>
-                    <button class="sign-button" onclick="new function(){window.location.href = '/auth/register'};">Sign up</button>
+                    <button class="sign-button" onclick="new function(){window.location.href = '/signup'};">Sign up</button>
                 <% } %>
         </div>
         <div class="hamburger">
@@ -72,7 +61,7 @@
     .right-side-nav {
         display: flex;
         justify-content: space-between;
-        width: 30vw;
+        width: max-content;
         align-items: center;
         margin-right: 30px;
     }

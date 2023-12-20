@@ -1,0 +1,34 @@
+{
+    "a": [
+        {
+            "body": "Amit Shah explains proposed changes to criminal laws, highlighting the replacement of colonial laws with new bills focusing on quicker charge sheets and priority to crimes affecting individuals, national security, and electoral offenses. Shah emphasized a shift from individual focus to national interest, allowing criticism of the government while penalizing acts against the country's integrity. The article details increased sections, revised penalties, and process improvements across the new bills introduced in Parliament, including defining modern terrorism, aligning laws with POCSO Act for sexual assault, fixing police accountability, and introducing Trial in Absentia provision.",
+            "bias": "neutral",
+            "headline": "Amit Shah Clarifies Proposed Criminal Law Amendments",
+            "site": "Hindustan Times"
+        },
+        {
+            "body": "Justin Trudeau claims a 'tonal shift' in India-Canada relations post the US plot row involving an alleged Indian government employee. Trudeau accuses unidentified Indian agents of involvement in a Canadian murder, while India denies the claim and seeks evidence. The US indictment alleges Indian officials offered money for an assassination. Trudeau emphasizes a desire for collaboration over conflict, expressing Canada's interest in trade deals and Indo-Pacific strategies. In response, PM Modi reaffirms India's commitment to the rule of law and willingness to investigate provided information, addressing concerns about extremist groups operating abroad.",
+            "bias": "neutral",
+            "headline": "Justin Trudeau Discusses India-Canada Relations Amid US Plot Row",
+            "site": "Hindustan Times"
+        },
+        {
+            "body": "The Wire discusses the repercussions of the suspension of 143 MPs in the ongoing parliament session, affecting over 14 crore voters. The absence of these MPs leaves electors voiceless and significantly depletes opposition party strength in both the Lok Sabha and the Rajya Sabha. The article emphasizes the impact on parliamentary proceedings, noting the deletion of 71 questions raised by MPs, affecting transparency and accountability within the government. The piece also highlights the loss of public access to information due to the cancellation of these questions, stressing the crucial role of MPs in representing citizens' concerns.",
+            "bias": "left",
+            "headline": "Analysis of the Impact of MP Suspensions on Voters and Parliamentary Functioning",
+            "site": "The Wire"
+        },
+        {
+            "body": "The Lok Sabha passed three criminal Bills in the absence of 97 suspended opposition MPs, receiving support from ruling party MPs and some friendly parties. Only AIMIM and Shiromani Akali Dal members voiced concerns, citing the Bills as enabling a 'police state' with unchecked government power. Opposition MPs criticized the legislative process's undemocratic nature and raised apprehensions about increased police and government authority. Home Minister Amit Shah defended the Bills, asserting they align with the Indian Constitution's spirit and define terrorism for the first time. The Bills, initially introduced in August and later withdrawn for redrafting, have faced criticism for potential political misuse, alterations in defining crimes like terrorism, and exclusion of certain committee recommendations.",
+            "bias": "left",
+            "headline": "Passing of Three Criminal Bills Amid Absence of Suspended Opposition MPs",
+            "site": "The Wire"
+        },
+        {
+            "body": "A report by the Comptroller and Auditor General of India criticized the Maharashtra Industrial Development Corporation (MIDC) for granting ineligible concessions to five entities, including Reliance affiliates, resulting in a loss of Rs 48.94 crore to the exchequer. It highlighted irregularities in plot allotments, subletting charges, and questioned the direct allotment of industrial plots without auctions. The MIDC defended its decisions, stating they were made to encourage entrepreneurs and address certain emergencies. The report also pointed out relaxation in rules, lack of transparency, and irregularities in revenue recovery by MIDC, among other criticisms.",
+            "bias": "neutral",
+            "headline": "CAG Report Criticizes Maharashtra Industrial Development Corporation's Concessions and Irregular Allotments",
+            "site": "Newslaundry"
+        }
+    ]
+}

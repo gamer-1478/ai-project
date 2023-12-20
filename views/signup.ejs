@@ -1,0 +1,104 @@
+<div>
+    <div class="landing-class">
+        <div class="signup">
+            <h1>Sign Up to Revolutionize News</h1>
+            <div class="signup-form">
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" placeholder="Ashok.Kumar@gmail.com" />
+                </div>
+                <br> <br>
+                <input type="button" value="proceed" onclick="Submit1()" class="signup-button" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function Submit1() {
+        console.log("here");
+        var email = document.getElementById("email").value;
+
+        await fetch("/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: email
+            }),
+        }).then(async (response) => {
+            var res = await response.json();
+
+            if (res.success) {
+                await notyf.success(
+                    "You have been successfully registered!"
+                );
+                setTimeout(function () {
+                    window.location.href = "/";
+                }, 1000);
+            } else {
+                await notyf.error(res[0].msg);
+            }
+        });
+    }
+</script>
+
+<style>
+    .click-here {
+        color: #393E47;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .signup-button {
+        margin-top: 20px;
+        background-color: #393E47;
+        color: white;
+        border-radius: 5px;
+        width: 130px;
+        height: 50px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .field {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    input {
+        width: 300px;
+        height: 30px;
+        border-radius: 15px;
+        border: 1px solid #BBBBBB;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: transparent;
+        color: black;
+    }
+
+    .signup-form {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .signup {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .landing-class {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 90px);
+    }
+</style>

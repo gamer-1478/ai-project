@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Newsletter</title>
+</head>
+
+<body style="font-family: Arial, sans-serif; margin: 20px;">
+    <h1 style="text-align: center;">SnapShot News</h1>
+    <ul style="list-style: none; padding: 0;">
+        <% newsletterItems.forEach(function(item) { %>
+            <li
+                style="background-color: #f9f9f9; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                <h2 style="margin-top: 0;">
+                    <%= item.headline %>
+                </h2>
+                <p style="margin-bottom: 10px;"><strong>Source:</strong>
+                    <%= item.site %>
+                </p>
+                <p style="margin-bottom: 10px;"><strong>Bias:</strong>
+                    <%= item.bias %>
+                </p>
+                <p>
+                    <%= item.body %>
+                </p>
+            </li>
+            <% }); %>
+    </ul>
+</body>
+
+</html>
