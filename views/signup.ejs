@@ -8,14 +8,20 @@
                     <input type="text" id="email" name="email" placeholder="Ashok.Kumar@gmail.com" />
                 </div>
                 <br> <br>
-                <input type="button" value="proceed" onclick="Submit1()" class="signup-button" />
+                <input id="registerbutt" type="button" value="proceed" onclick="Submit1()" class="signup-button" />
             </div>
         </div>
     </div>
 </div>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
 <script>
+    const notyf = new Notyf();
     async function Submit1() {
+        document.getElementById("registerbutt").disabled = true;
         console.log("here");
         var email = document.getElementById("email").value;
 
@@ -29,7 +35,6 @@
             }),
         }).then(async (response) => {
             var res = await response.json();
-
             if (res.success) {
                 await notyf.success(
                     "You have been successfully registered!"
@@ -38,7 +43,7 @@
                     window.location.href = "/";
                 }, 1000);
             } else {
-                await notyf.error(res[0].msg);
+                await notyf.error(res.message);
             }
         });
     }

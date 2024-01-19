@@ -51,6 +51,15 @@ const transporter = nodemailer.createTransport({
 app.post('/register', async (req, res) => {
     console.log(req.body)
 
+    var findedUser = await userSchema.findOne({ email: req.body.email })
+
+    if (findedUser && findedUser.verified) {
+        return res.send({
+            success: false,
+            message: 'User already exists and is verified'
+        })
+    }
+
     const user = await userSchema.create({
         email: req.body.email,
         token: v4()
@@ -77,7 +86,6 @@ app.post('/register', async (req, res) => {
         message: 'Email sent successfully',
         info: info
     })
-
 })
 
 app.get('/verify/:token', async (req, res) => {
@@ -91,7 +99,10 @@ app.get('/verify/:token', async (req, res) => {
     user.verified = true
     user.save()
     sendWeeklyEmail(user.email)
-    res.redirect('/')
+    res.send({
+        success: true,
+        message: 'User verified'
+    })
 });
 
 app.listen(port, () => {
@@ -174,5 +185,13 @@ async function summarize(url){
     const response1 = json.choices[0].message.content
     return response1
 }
+
+setInterval(async () => {
+    const users = await userSchema.find({ verified: true })
+    users.forEach(async user => {
+        sendWeeklyEmail(user.email)
+    });
+}, 24 * 60 * 60 * 1000);
+
 
 //Summarize the following article. Return a json with a 150 word summary, a neutral headline, and the bias in the article in the format of {"body":<body here>, "bias": "neutral,right,left", "headline":<new headline>}. do not return anything other than the json in any shape or form. 
