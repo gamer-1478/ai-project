@@ -136,7 +136,7 @@ async function sendWeeklyEmail(email){
 }
 
 async function GetListOfNews(){
-    const response = await fetch('https://newsapi.org/v2/top-headlines?apiKey=b095ea0bbe47498d9679bf6d3a67d6b0&country=in&sort=popularity')
+    const response = await fetch(`https://newsapi.org/v2/top-headlines?apiKey=${process.env.NEWSAPI_KEY}&country=in&sort=popularity`)
     const json = await response.json()
     const articles =[]
     for (let i = 0; i < 5; i++) {
