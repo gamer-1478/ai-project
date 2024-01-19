@@ -6,10 +6,14 @@ const ejs = require('ejs');
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
 const userSchema = require('./schema/userSchema');
+const newsListSchema = require('./schema/newsListSchema');
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
 const { v4: uuidv4, v4 } = require('uuid');
+const fetch = require('node-fetch');
+const puppeteer = require('puppeteer');
+const { get } = require('http');
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
@@ -43,7 +47,6 @@ const transporter = nodemailer.createTransport({
         pass: process.env.PASS
     }
 });
-
 
 app.post('/register', async (req, res) => {
     console.log(req.body)
@@ -95,16 +98,31 @@ app.listen(port, () => {
     console.log(`app listening on port ${port}!`);
 });
 
-
 async function sendWeeklyEmail(email){
-    const weekly = JSON.parse(fs.readFileSync(path.join(__dirname, 'weekly.json'), 'utf8'))
-    const emailBody = ejs.render(fs.readFileSync(path.join(__dirname, 'views/weeklyemail.ejs'), 'utf8'), { newsletterItems: weekly.a})
+    var latest = await newsListSchema.find().sort({ _id: -1 });
+    if( new Date(Date(latest.date)).getTime() <= new Date(Date.now() - 24 * 60 * 60 * 1000).getTime()){
+        const news = await GetListOfNews()
+        const newsList = await newsListSchema.create({
+            articles: news
+        })
+        newsList.save()
+    }
+
+    var a = latest[0].articles.map(element => {
+        element = JSON.parse(JSON.parse(JSON.stringify(JSON.parse(element))));
+        return element;
+    });
+
+    console.log(a)
+
+    const emailBody = ejs.render(fs.readFileSync(path.join(__dirname, 'views/weeklyemail.ejs'), 'utf8'), { newsletterItems: a })
     var curr = new Date; // get current date
     var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
     var last = first + 6; // last day is the first day + 6
 
     var firstday = new Date(curr.setDate(first));
     var lastday = new Date(curr.setDate(last));
+
 
     var date = firstday.getDate() + "-" + firstday.getMonth() + "-" + firstday.getFullYear() + " to " + lastday.getDate() + "-" + lastday.getMonth() + "-" + lastday.getFullYear()
     const info = await transporter.sendMail({
@@ -115,6 +133,46 @@ async function sendWeeklyEmail(email){
     });
 
     return info
+}
+
+async function GetListOfNews(){
+    const response = await fetch('https://newsapi.org/v2/top-headlines?apiKey=b095ea0bbe47498d9679bf6d3a67d6b0&country=in&sort=popularity')
+    const json = await response.json()
+    const articles =[]
+    for (let i = 0; i < 5; i++) {
+        articles.push(JSON.stringify(await summarize(json.articles[i].url)));
+    }
+    return articles;
+}
+
+async function summarize(url){
+    //use puppeteer to open the page, get the content and use openai chatgpt to summarize it
+    const browser = await puppeteer.launch({ headless: false });
+    const page = await browser.newPage();
+    await page.setViewport({ width: 1900, height: 940 });
+    await page.goto(url);
+    await page.waitForSelector('body');
+    const content = await page.evaluate(() => document.querySelector('body').innerText);
+    await browser.close();
+    //send the content to chatgpt and get the summary
+    const response = await fetch('https://jamsapi.hackclub.dev/openai/chat/completions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + process.env.OPENAI_API_KEY
+        },
+        body: JSON.stringify({
+            "model": "gpt-3.5-turbo",
+            "messages": [{
+                "role": "user",
+                "content": ("Summarize the following article. Return a json with a 150 word summary, a neutral headline, and the bias in the article in the format of {\"body\":<body here>, \"bias\": \"neutral,right,left\", \"headline\":<new headline>, \"newssite\":<news site of the article>}. do not return anything other than the json in any shape or form. The article contains garbage info that is not related to the article such as promotional material. Make sure it does not get into the response. \n\n" + content.toString()).slice(0, 4097)
+            }]
+        }),
+    })
+    const json = await response.json()
+    console.log(json)
+    const response1 = json.choices[0].message.content
+    return response1
 }
 
 //Summarize the following article. Return a json with a 150 word summary, a neutral headline, and the bias in the article in the format of {"body":<body here>, "bias": "neutral,right,left", "headline":<new headline>}. do not return anything other than the json in any shape or form. 
