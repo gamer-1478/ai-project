@@ -111,12 +111,13 @@ app.listen(port, () => {
 
 async function sendWeeklyEmail(email){
     var latest = await newsListSchema.find().sort({ _id: -1 });
-    if( new Date(Date(latest.date)).getTime() <= new Date(Date.now() - 24 * 60 * 60 * 1000).getTime()){
+    if ((latest.length >= 1 && new Date(Date(latest.date)).getTime() <= new Date(Date.now() - 24 * 60 * 60 * 1000).getTime()) || latest.length == 0) {
         const news = await GetListOfNews()
         const newsList = await newsListSchema.create({
             articles: news
         })
         newsList.save()
+        latest = await newsListSchema.find().sort({ _id: -1 });
     }
 
     var a = latest[0].articles.map(element => {
